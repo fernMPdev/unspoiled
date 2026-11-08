@@ -1,0 +1,70 @@
+/*
+ * Feature `seek`: buttons injected by `content/features/seek-controls.js`.
+ * The pill background matches YouTube's 2025+ player controls so the labels
+ * stay readable over bright video.
+ */
+
+.unspoiled-seek {
+  display: none;
+}
+
+html[data-unspoiled~="seek"] .unspoiled-seek {
+  display: inline-flex;
+  align-self: center;
+  align-items: center;
+  gap: 2px;
+  height: 40px;
+  margin: 0 8px;
+  padding: 0 4px;
+  border-radius: 28px;
+  background: rgb(0 0 0 / 30%);
+}
+
+.unspoiled-seek button {
+  padding: 8px 9px;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  color: #fff;
+  font:
+    500 13px/1 Roboto,
+    Arial,
+    sans-serif;
+  white-space: nowrap;
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.unspoiled-seek button:hover {
+  background: rgb(255 255 255 / 15%);
+  opacity: 1;
+}
+
+.unspoiled-seek button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 1px;
+}
+
+/* Centered confirmation ("+10 s") shown after each jump. */
+.unspoiled-toast {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 60;
+  padding: 10px 16px;
+  border-radius: 20px;
+  background: rgb(0 0 0 / 60%);
+  color: #fff;
+  font:
+    500 18px/1 Roboto,
+    Arial,
+    sans-serif;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease;
+}
+
+.unspoiled-toast--visible {
+  opacity: 1;
+}

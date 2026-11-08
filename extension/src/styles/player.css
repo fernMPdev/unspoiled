@@ -1,0 +1,24 @@
+/*
+ * Feature `player`: progress bar and time readout.
+ * Covers the watch page player, the miniplayer and the hover preview player
+ * (`yt-inline-player-controls`) that plays when you rest on a thumbnail.
+ */
+
+html[data-unspoiled~="player"]
+  :is(
+    .ytp-progress-bar-container,
+    .ytp-progress-bar,
+    .ytp-heat-map-container,
+    .ytp-time-display,
+    .ytp-time-wrapper,
+    .ytp-time-contents,
+    .ytp-tooltip.ytp-preview,
+    .ytp-storyboard-framepreview,
+    .ytp-clip-watch-full-video-button-separator,
+    ytd-miniplayer #progress-bar,
+    yt-inline-player-controls yt-progress-bar,
+    yt-inline-player-controls yt-progress-bar-line,
+    .ytInlinePlayerControlsTimeDisplay
+  ) {
+  display: none !important;
+}

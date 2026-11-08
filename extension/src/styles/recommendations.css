@@ -1,0 +1,18 @@
+/*
+ * Feature `recommendations`: up-next sidebar and end-of-video suggestions,
+ * whose titles ("Highlights", "Final score"…) often give the ending away.
+ * The playlist panel and live chat share the sidebar and stay visible.
+ */
+
+html[data-unspoiled~="recommendations"]
+  :is(
+    ytd-watch-flexy #related,
+    .ytp-ce-element,
+    .ytp-endscreen-content,
+    .html5-endscreen,
+    .ytp-autonav-endscreen-countdown-overlay,
+    .ytp-pause-overlay,
+    .ytp-fullscreen-grid
+  ) {
+  display: none !important;
+}

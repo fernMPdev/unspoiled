@@ -1,0 +1,19 @@
+/*
+ * Feature `durations`: length badges and "already watched" bars on thumbnails.
+ * YouTube currently ships three generations of thumbnail markup (ytd-, ytw-
+ * and view-model lockups), so each is listed. Playlist "N videos" badges live
+ * in a different element and are intentionally left visible.
+ */
+
+html[data-unspoiled~="durations"]
+  :is(
+    ytd-thumbnail-overlay-time-status-renderer,
+    ytd-thumbnail-overlay-resume-playback-renderer,
+    ytw-thumbnail-overlay-time-status-renderer,
+    ytw-thumbnail-overlay-resume-playback-renderer,
+    yt-thumbnail-bottom-overlay-view-model,
+    yt-thumbnail-overlay-progress-bar-view-model,
+    ytm-thumbnail-overlay-time-status-renderer
+  ) {
+  display: none !important;
+}

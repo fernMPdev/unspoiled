@@ -1,0 +1,19 @@
+/*
+ * Feature `chapters`: chapter titles and timestamps.
+ * Description timestamps without an `href` are tagged at runtime by
+ * `content/features/timestamp-masker.js`.
+ */
+
+html[data-unspoiled~="chapters"]
+  :is(
+    .ytp-chapter-container,
+    ytd-macro-markers-list-renderer,
+    ytd-horizontal-card-list-renderer:has(ytd-macro-markers-list-item-renderer),
+    ytd-engagement-panel-section-list-renderer[target-id*="macro-markers"],
+    ytd-expandable-metadata-renderer,
+    ytd-watch-metadata a[href*="&t="],
+    ytd-watch-metadata a[href*="?t="],
+    a[data-unspoiled-timestamp]
+  ) {
+  display: none !important;
+}

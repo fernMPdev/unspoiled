@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Unspoiled</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="header">
+      <img class="header__logo" src="../../icons/icon48.png" alt="" width="32" height="32" />
+      <div class="header__text">
+        <h1 class="header__title">Unspoiled</h1>
+        <p class="header__status" id="status" aria-live="polite"></p>
+      </div>
+      <label class="switch switch--large">
+        <input type="checkbox" id="enabled" data-i18n-label="toggleAll" />
+        <span class="switch__track" aria-hidden="true"></span>
+      </label>
+    </header>
+
+    <ul class="features" id="features"></ul>
+
+    <footer class="footer" data-i18n="keyboardTip"></footer>
+
+    <template id="feature-row">
+      <li class="feature">
+        <label class="feature__label">
+          <span class="feature__text">
+            <strong class="feature__title"></strong>
+            <small class="feature__hint"></small>
+          </span>
+          <span class="switch">
+            <input type="checkbox" />
+            <span class="switch__track" aria-hidden="true"></span>
+          </span>
+        </label>
+      </li>
+    </template>
+
+    <template id="seek-steps">
+      <fieldset class="steps">
+        <legend class="steps__legend" data-i18n="seekStepsLegend"></legend>
+        <div class="steps__options" role="group"></div>
+        <small class="steps__hint"></small>
+      </fieldset>
+    </template>
+
+    <script src="../shared/i18n.js"></script>
+    <script src="../shared/settings.js"></script>
+    <script src="../shared/time.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

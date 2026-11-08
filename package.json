@@ -1,0 +1,31 @@
+{
+  "name": "unspoiled",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension that hides YouTube's progress bar, video lengths, chapters, comments and recommendations so nothing spoils the video.",
+  "license": "MIT",
+  "author": "fernMPdev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernMPdev/unspoiled.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "typecheck": "tsc",
+    "test": "node --test",
+    "check": "npm run lint && npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/chrome": "^0.3.7",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
+    "prettier": "^3.9.10",
+    "typescript": "^7.0.2"
+  }
+}

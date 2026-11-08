@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "short_name": "Unspoiled",
+  "version": "1.0.0",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "minimum_chrome_version": "120",
+  "permissions": ["storage"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "__MSG_extName__",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*", "*://*.youtube-nocookie.com/*"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "css": [
+        "src/styles/player.css",
+        "src/styles/durations.css",
+        "src/styles/chapters.css",
+        "src/styles/comments.css",
+        "src/styles/recommendations.css",
+        "src/styles/seek-controls.css"
+      ],
+      "js": [
+        "src/shared/i18n.js",
+        "src/shared/settings.js",
+        "src/shared/time.js",
+        "src/content/lib/dom-watcher.js",
+        "src/content/features/seek-controls.js",
+        "src/content/features/comments-gate.js",
+        "src/content/features/timestamp-masker.js",
+        "src/content/main.js"
+      ]
+    }
+  ]
+}

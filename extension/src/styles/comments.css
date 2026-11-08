@@ -1,0 +1,58 @@
+/*
+ * Feature `comments`: the section stays hidden until the "Show comments"
+ * gate (see `content/features/comments-gate.js`) sets the revealed attribute.
+ */
+
+.unspoiled-comments-gate {
+  --gate-fg: #0f0f0f;
+  --gate-muted: #606060;
+  --gate-bg: rgb(0 0 0 / 5%);
+  --gate-bg-hover: rgb(0 0 0 / 10%);
+
+  display: none;
+  margin: 24px 0;
+  text-align: center;
+  font-family: Roboto, Arial, sans-serif;
+}
+
+/* YouTube flags its dark theme with a `dark` attribute on <html>. */
+html[dark] .unspoiled-comments-gate {
+  --gate-fg: #f1f1f1;
+  --gate-muted: #aaa;
+  --gate-bg: rgb(255 255 255 / 10%);
+  --gate-bg-hover: rgb(255 255 255 / 20%);
+}
+
+html[data-unspoiled~="comments"]:not([data-unspoiled-comments-revealed]) {
+  & ytd-comments#comments {
+    display: none !important;
+  }
+
+  & .unspoiled-comments-gate {
+    display: block;
+  }
+}
+
+.unspoiled-comments-gate button {
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 18px;
+  background: var(--gate-bg);
+  color: var(--gate-fg);
+  font:
+    500 14px/1 Roboto,
+    Arial,
+    sans-serif;
+  cursor: pointer;
+}
+
+.unspoiled-comments-gate button:hover {
+  background: var(--gate-bg-hover);
+}
+
+.unspoiled-comments-gate small {
+  display: block;
+  margin-top: 8px;
+  color: var(--gate-muted);
+  font-size: 12px;
+}
