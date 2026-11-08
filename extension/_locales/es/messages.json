@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "Unspoiled para YouTube",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Mira YouTube sin spoilers: oculta la barra de progreso, la duración, los capítulos, los comentarios y los recomendados.",
+    "description": "Extension description shown in the Chrome Web Store and chrome://extensions."
+  }
+}

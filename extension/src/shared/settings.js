@@ -2,9 +2,9 @@
  * User settings, shared by the content script and the popup.
  *
  * Stored in `chrome.storage.sync` as a flat object: a master `enabled`
- * switch, one boolean per feature, and the list of seek step sizes. Every
- * feature defaults to on, so a storage failure errs on the side of hiding
- * too much.
+ * switch, one boolean per feature, the list of seek step sizes and the UI
+ * language. Every feature defaults to on, so a storage failure errs on the
+ * side of hiding too much.
  */
 ((ns) => {
   "use strict";
@@ -25,12 +25,19 @@
   /** Each step adds two buttons (− and +), so cap them to keep the bar tidy. */
   const MAX_SEEK_STEPS = 4;
 
+  /** UI languages with a dictionary in `shared/locales/`. */
+  const LANGUAGES = Object.freeze(["en", "es"]);
+
+  /** Language preference meaning "follow the browser". */
+  const AUTO_LANGUAGE = "auto";
+
   /** @type {Readonly<UnspoiledSettings>} */
   const DEFAULTS = Object.freeze(
     /** @type {UnspoiledSettings} */ ({
       enabled: true,
       ...Object.fromEntries(FEATURES.map((id) => [id, true])),
       seekSteps: /** @type {number[]} */ (Object.freeze([10, 60])),
+      language: AUTO_LANGUAGE,
     }),
   );
 
@@ -64,6 +71,9 @@
     return /** @type {UnspoiledSettings} */ ({
       ...Object.fromEntries(flags),
       seekSteps: normalizeSeekSteps(raw.seekSteps),
+      language: LANGUAGES.includes(/** @type {string} */ (raw.language))
+        ? raw.language
+        : AUTO_LANGUAGE,
     });
   }
 
@@ -107,6 +117,8 @@
     FEATURES,
     SEEK_STEP_OPTIONS,
     MAX_SEEK_STEPS,
+    LANGUAGES,
+    AUTO_LANGUAGE,
     DEFAULTS,
     normalize,
     normalizeSeekSteps,

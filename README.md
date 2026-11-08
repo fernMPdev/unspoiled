@@ -53,6 +53,12 @@ With 1 min and 1 h you get `−1 h` `−1 min` `+1 min` `+1 h`. The default is
 YouTube's own shortcuts keep working: <kbd>←</kbd> <kbd>→</kbd> seek 5 s,
 <kbd>J</kbd> <kbd>L</kbd> seek 10 s.
 
+### Languages
+
+English and Spanish. Unspoiled starts in your browser's language. Switch with
+the **ES | EN** toggle in the popup, and the buttons it adds to YouTube change
+language instantly, with no reload.
+
 <br clear="right">
 
 ## Install
@@ -88,6 +94,12 @@ flowchart LR
   rebuilds its DOM constantly, so `sync` re-runs after every debounced batch of
   mutations and on `yt-navigate-finish`. A failing feature is isolated and
   logged without breaking the others.
+- **Switchable languages.** `chrome.i18n` always follows the browser and
+  can't be changed from an extension, so UI strings live in plain
+  dictionaries ([`shared/locales/`](extension/src/shared/locales)) and the
+  chosen language is stored with the other settings. `_locales/` only keeps
+  the name and description that Chrome reads itself. Tests check that every
+  language has the same keys and placeholders.
 - **No build step, no runtime dependencies.** The extension is plain scripts
   sharing a `globalThis.Unspoiled` namespace. Types are still enforced:
   `tsc --checkJs` verifies the JSDoc annotations against
@@ -98,10 +110,11 @@ flowchart LR
 ```
 extension/                  # what gets loaded into Chrome
 ├── manifest.json
-├── _locales/en/            # every user-facing string
+├── _locales/               # extension name and description (en, es)
 ├── icons/
 └── src/
-    ├── shared/             # i18n, settings and time helpers, used by content script and popup
+    ├── shared/             # settings, i18n and time helpers, used by content script and popup
+    │   └── locales/        # UI strings (en.js, es.js)
     ├── content/
     │   ├── lib/            # DOM watcher
     │   ├── features/       # seek controls, comment gate, timestamp masker

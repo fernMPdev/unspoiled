@@ -21,7 +21,17 @@
 
     <ul class="features" id="features"></ul>
 
-    <footer class="footer" data-i18n="keyboardTip"></footer>
+    <footer class="footer">
+      <span class="footer__tip" data-i18n="keyboardTip"></span>
+      <div class="language" id="language" role="radiogroup" data-i18n-label="languageLabel">
+        <button type="button" class="language__option" role="radio" data-language="es" lang="es">
+          ES
+        </button>
+        <button type="button" class="language__option" role="radio" data-language="en" lang="en">
+          EN
+        </button>
+      </div>
+    </footer>
 
     <template id="feature-row">
       <li class="feature">
@@ -42,12 +52,14 @@
       <fieldset class="steps">
         <legend class="steps__legend" data-i18n="seekStepsLegend"></legend>
         <div class="steps__options" role="group"></div>
-        <small class="steps__hint"></small>
+        <small class="steps__hint" data-i18n="seekStepsHint"></small>
       </fieldset>
     </template>
 
-    <script src="../shared/i18n.js"></script>
     <script src="../shared/settings.js"></script>
+    <script src="../shared/locales/en.js"></script>
+    <script src="../shared/locales/es.js"></script>
+    <script src="../shared/i18n.js"></script>
     <script src="../shared/time.js"></script>
     <script src="popup.js"></script>
   </body>

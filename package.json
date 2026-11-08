@@ -1,6 +1,6 @@
 {
   "name": "unspoiled",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Chrome extension that hides YouTube's progress bar, video lengths, chapters, comments and recommendations so nothing spoils the video.",
   "license": "MIT",

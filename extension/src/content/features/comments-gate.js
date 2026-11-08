@@ -6,7 +6,7 @@
 ((ns) => {
   "use strict";
 
-  const { t } = ns.i18n;
+  const { t, getLanguage } = ns.i18n;
 
   const SELECTOR = Object.freeze({ comments: "ytd-comments#comments" });
   const CLASS = Object.freeze({ gate: "unspoiled-comments-gate" });
@@ -16,6 +16,7 @@
   function createGate() {
     const gate = document.createElement("div");
     gate.className = CLASS.gate;
+    gate.lang = getLanguage();
 
     const button = document.createElement("button");
     button.type = "button";
@@ -41,9 +42,15 @@
     sync(active) {
       if (!active) return;
       const comments = document.querySelector(SELECTOR.comments);
-      if (comments && !comments.previousElementSibling?.classList.contains(CLASS.gate)) {
-        comments.before(createGate());
-      }
+      if (!comments) return;
+
+      const current = comments.previousElementSibling;
+      const hasGate = current instanceof HTMLElement && current.classList.contains(CLASS.gate);
+      if (hasGate && current.lang === getLanguage()) return;
+
+      // Missing, or written in another language: (re)build it.
+      if (hasGate) current.replaceWith(createGate());
+      else comments.before(createGate());
     },
   });
 })((globalThis.Unspoiled ??= {}));

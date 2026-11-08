@@ -15,7 +15,11 @@ interface UnspoiledSettings {
   seek: boolean;
   /** Seek step sizes in seconds, ascending; each gets a − and + button. */
   seekSteps: number[];
+  /** `"auto"` follows the browser; otherwise one of `settings.LANGUAGES`. */
+  language: string;
 }
+
+type UnspoiledLocale = Readonly<Record<string, string>>;
 
 interface UnspoiledFeature {
   /** Must match an id in `Unspoiled.settings.FEATURES`. */
@@ -27,14 +31,22 @@ interface UnspoiledFeature {
 }
 
 interface UnspoiledNamespace {
+  locales: Record<string, UnspoiledLocale>;
   i18n: {
-    t(key: string, substitutions?: string | string[]): string;
+    readonly FALLBACK: string;
+    detect(): string;
+    resolve(preference: string): string;
+    setLanguage(preference: string): string;
+    getLanguage(): string;
+    t(key: string, params?: Record<string, string | number>): string;
     localize(root: ParentNode): void;
   };
   settings: {
     readonly FEATURES: readonly string[];
     readonly SEEK_STEP_OPTIONS: readonly number[];
     readonly MAX_SEEK_STEPS: number;
+    readonly LANGUAGES: readonly string[];
+    readonly AUTO_LANGUAGE: string;
     readonly DEFAULTS: Readonly<UnspoiledSettings>;
     normalize(raw?: Record<string, unknown>): UnspoiledSettings;
     normalizeSeekSteps(raw: unknown): number[];

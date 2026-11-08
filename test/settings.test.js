@@ -73,3 +73,18 @@ describe("normalizeSeekSteps", () => {
     assert.deepEqual(normalizeSeekSteps("60"), [10, 60]);
   });
 });
+
+describe("language", () => {
+  it("defaults to following the browser", () => {
+    assert.equal(normalize().language, "auto");
+  });
+
+  it("keeps supported languages", () => {
+    assert.equal(normalize({ language: "es" }).language, "es");
+  });
+
+  it("rejects anything else", () => {
+    assert.equal(normalize({ language: "fr" }).language, "auto");
+    assert.equal(normalize({ language: 1 }).language, "auto");
+  });
+});

@@ -19,6 +19,7 @@
   /** @param {UnspoiledSettings} next */
   function apply(next) {
     settings = next;
+    ns.i18n.setLanguage(settings.language);
     active = new Set(ns.settings.activeFeatures(settings));
     document.documentElement.setAttribute(ROOT_ATTR, [...active].join(" "));
     syncFeatures();

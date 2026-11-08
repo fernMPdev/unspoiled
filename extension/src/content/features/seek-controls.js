@@ -6,7 +6,7 @@
 ((ns) => {
   "use strict";
 
-  const { t } = ns.i18n;
+  const { t, getLanguage } = ns.i18n;
   const { formatDuration, formatStep, clampSeek, toSeekDeltas } = ns.time;
 
   const TOAST_MS = 700;
@@ -62,16 +62,19 @@
   /**
    * @param {Element} player
    * @param {number[]} deltas signed seconds, one button each
+   * @param {string} key identifies the steps and language it was built for
    * @returns {HTMLDivElement}
    */
-  function createGroup(player, deltas) {
+  function createGroup(player, deltas, key) {
     const group = document.createElement("div");
     group.className = CLASS.group;
-    group.dataset.deltas = deltas.join();
+    group.dataset.key = key;
 
     for (const delta of deltas) {
       const label = formatStep(delta);
-      const name = t(delta < 0 ? "seekBackward" : "seekForward", formatDuration(delta));
+      const name = t(delta < 0 ? "seekBackward" : "seekForward", {
+        amount: formatDuration(delta),
+      });
       const button = document.createElement("button");
       button.type = "button";
       button.textContent = label;
@@ -92,17 +95,17 @@
     sync(active, settings) {
       if (!active) return; // CSS hides already-injected buttons
       const deltas = toSeekDeltas(settings.seekSteps);
-      const key = deltas.join();
+      const key = `${deltas.join()}|${getLanguage()}`;
 
       for (const player of document.querySelectorAll(SELECTOR.player)) {
         const controls = player.querySelector(SELECTOR.leftControls);
         if (!controls) continue;
 
         const current = controls.querySelector(`.${CLASS.group}`);
-        if (current instanceof HTMLElement && current.dataset.deltas === key) continue;
+        if (current instanceof HTMLElement && current.dataset.key === key) continue;
 
-        // Missing, or built for different step sizes: (re)build it.
-        const group = createGroup(player, deltas);
+        // Missing, or built for other step sizes or language: (re)build it.
+        const group = createGroup(player, deltas, key);
         if (current) current.replaceWith(group);
         else controls.append(group);
       }
